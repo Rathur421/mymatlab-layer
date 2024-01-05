@@ -1,0 +1,39 @@
+#+title: My spacemacs MATLAB layer with lsp and tree-sitter support
+
+I don't really intend to publish another matlab package for emacs but I tought people could be interested in what I've done so here it is.
+
+While I love the fact that people have maintained a [[https://sourceforge.net/p/matlab-emacs/activity/?page=0&limit=100#658dab84943d1ae0ab0748f2][matlab for emacs package for a while now]] and I really thank all of them for their work. I've always found the package a bit clunky.
+
+So with the recent release of an [[https://github.com/mathworks/MATLAB-language-server][official MATLAB LSP server]], I've decided to see if I could put something together quickly to work with.
+
+My approach is basically for now:
+- [X] make lsp work
+- [X] remove mlint in the original matlab-mode
+- [X] make tree-sitter works
+- [X] indentation based on tree-sitter
+- [ ] tree-sitter based navigation using [[https://github.com/meain/evil-textobj-tree-sitter][evil-textobj-tree-sitter]]
+- [ ] currently it seems like lsp doesn't index the wole project but only opened buffer.
+- [ ] remove as much as possible (probably a lot that I can still remove)
+- [ ] ...
+- [ ] probably should do some test at some point
+
+I've started by removing mlint as LSP is using it under the hood as well as the current indentation implementations by replacing it with [[https://codeberg.org/FelipeLema/tree-sitter-indent.el][tree-sitter-indent]] configuration.
+
+I'm not a big user of matlab nor am I super good at elisp, so I've most likely broken a bunch of stuff, but you're welcome to ask any question and use what I've done here if you want to give it a try.
+
+* LSP
+** Update
+To update matlab language server run
+#+begin_src sh
+  cd MATLAB-language-server/
+  git pull
+  npm install
+  # npm run compile # for developement
+  npm run package # for production build
+#+end_src
+
+* Tree-sitter
+Tree sitter-support is available at [[https://github.com/emacs-tree-sitter/tree-sitter-langs/issues][tree-sitter-langs]] which take the grammars from [[https://github.com/acristoffers/tree-sitter-matlab/tree/main][here]]
+
+** Indent
+Indent suports is also configured and is using [[https://codeberg.org/FelipeLema/tree-sitter-indent.el][tree-sitter-indent]]
