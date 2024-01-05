@@ -5,30 +5,35 @@
   (defgroup language-matlab nil
     "Settings for the Bash Language Server."
     :group 'lsp-mode
-    :link '(url-link "https://github.com/mathworks/MATLAB-language-server"))
+    :link '(url-link "https://github.com/mathworks/MATLAB-language-server")
+    :package-version '(lsp-mode . "8.0.1"))
 
- (lsp-defcustom lsp-matlab-install-path "/home/arthurvaron/.local/share/MATLAB/R2023a"
+ (lsp-defcustom lsp-matlab-install-path "~/.local/share/Matlab"
    "The full path to the top-level directory of the MATLAB installation you want to use with this extension. You can determine the full path to your MATLAB installation using the `matlabroot` command in MATLAB. For more information, refer to the [README](https://github.com/mathworks/MATLAB-extension-for-vscode/blob/main/README.md)."
    :type 'string
    :group 'language-matlab
+   :package-version '(lsp-mode . "8.0.1")
    :lsp-path "MATLAB.installPath")
 
  (lsp-defcustom lsp-matlab-matlab-connection-timing "onStart"
    "Choose when this extension starts MATLAB in the background. Some functionality will be unavailable without MATLAB running in the background."
    :type '(choice (:tag onStart onDemand never))
    :group 'language-matlab
+   :package-version '(lsp-mode . "8.0.1")
    :lsp-path "MATLAB.matlabConnectionTiming")
 
  (lsp-defcustom lsp-matlab-index-workspace t
    "Automatically index all MATLAB code files (.m) in the current workspace."
    :type 'boolean
    :group 'language-matlab
+   :package-version '(lsp-mode . "8.0.1")
    :lsp-path "MATLAB.indexWorkspace")
 
  (lsp-defcustom lsp-matlab-telemetry nil
    "Help improve this extension by sending user experience information to MathWorks. For more information, see the [MathWorks Privacy Policy](https://www.mathworks.com/company/aboutus/policies_statements.html)."
    :type 'boolean
    :group 'language-matlab
+   :package-version '(lsp-mode . "8.0.1")
    :lsp-path "MATLAB.telemetry")
 
  (defcustom lsp-matlab-server-command `("node"
@@ -44,6 +49,7 @@
    :new-connection (lsp-stdio-connection (lambda () lsp-matlab-server-command))
    :major-modes '(matlab-mode)
    :activation-fn (lsp-activate-on "matlab")
+   :library-folders-fn (lambda (_workspace) lsp-clients-matlab-library-directories)
    :server-id 'matlab-language-server))
  )
 

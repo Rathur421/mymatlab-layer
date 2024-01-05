@@ -1,0 +1,6 @@
+[submodule "MATLAB-language-server"]
+	path = MATLAB-language-server
+	url = https://github.com/mathworks/MATLAB-language-server.git
+[submodule "matlab-emacs-src"]
+	path = matlab-emacs-src
+	url = https://github.com/Rathur421/matlab-emacs-src.git
